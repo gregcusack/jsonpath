@@ -34,6 +34,9 @@ pub fn select_and_then_compare(path: &str, json: Value, target: Value) {
     let parser = PathParser::compile(path).unwrap();
     let mut selector = JsonSelector::new(parser);
     let result = selector.value(&json).select_as::<Value>().unwrap();
+    for val in result.iter() {
+        println!("val: {}", val);
+    }
     assert_eq!(
         result,
         match target {
